@@ -1,0 +1,21 @@
+{
+  "manifest_version": 2,
+  "name": "Fun extension Joker",
+  "description": "Play tricks on your friends",
+  "version": "1.0",
+  "author": "V.Vayavodzin",
+  "browser_action": {
+  "default_popup": "extension.html"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage",
+    "*://*/*"
+  ],
+  "background": {
+    "scripts": [
+     "background.js"
+    ]
+  }
+}
