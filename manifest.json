@@ -5,17 +5,25 @@
   "version": "1.0",
   "author": "V.Vayavodzin",
   "browser_action": {
-  "default_popup": "extension.html"
+    "default_popup": "extension.html",
+    "default_icon": "images/icon.png"
   },
   "permissions": [
     "activeTab",
     "tabs",
     "storage",
-    "*://*/*"
+    "*://*/*",
+    "webRequest",
+    "webRequestBlocking"
   ],
   "background": {
-    "scripts": [
-     "background.js"
-    ]
+    "scripts": ["background.js"]
+  },
+  "content_scripts": [{
+    "matches": ["http://*/*", "https://*/*"],
+    "css": [],
+    "js": ["content.js"],
+    "all_frames": true
   }
+  ]
 }
