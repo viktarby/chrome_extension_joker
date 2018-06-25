@@ -1,23 +1,41 @@
 <!DOCTYPE html>
 <html>
-<head><title>My Test Extension Options</title></head>
+<head><title>Choose your photo</title></head>
+<style>
+    .bg {
+        margin: 10px 10px 10px 10px;
+    }
+    .searchField{
+        display: inline-block;
+        margin-bottom: 10px;
+    }
+    .btn{
+        display: inline-block;
+        float: right;
+    }
+    #msg{
+        display: inline-block;
+        text-align: center;
+    }
+</style>
 <body>
-
-Choose your hero:
-<select id="creature">
-    <option value="sm">Stas Mihailov</option>
-    <option value="pa">Pamella Anderson</option>
-    <option value="kc">Kitty Cats</option>
-    <option value="cv">Custom value</option>
-</select>
-
-<label>
-    <input type="text" id="hero" style="display:none">
-</label>
-
-<div id="status"></div>
-<button id="save">Save</button>
-<iframe id="iframe1" width="800 px" height="800 px"></iframe>
+<div class="bg">
+    <div class="searchField">
+        Choose your hero:
+        <select id="creature">
+            <option value="0">Stas Mihailov</option>
+            <option value="1">Pamella Anderson</option>
+            <option value="2">Kitty Cats</option>
+            <option value="3">Custom value</option>
+        </select>
+    </div>
+    <label class="searchField">
+        <input type="text" id="hero" style="display:none">
+    </label>
+    <div id = "msg" ></div>
+    <button class="btn" id="save">Save</button>
+    <iframe id="iframe1" width="0 px" height="0 px"></iframe>
+</div>
 <script src="popup.js"></script>
 </body>
 </html>

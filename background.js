@@ -1,3 +1,18 @@
+chrome.runtime.onInstalled.addListener(function() {
+    var jokerAppOptions = {
+        trickType: 0,
+
+        searchCreature: { val: 0, text: "Stas Mihailov"},
+
+        blockedWebsites: ["www.youtube.com", "fb.com", "vk.com"],
+        redirectTo: "http://google.com",
+        message: "You\'ve visited infected resource, access denied"
+    };
+    chrome.storage.sync.set({jokerAppOptions: jokerAppOptions}, function() {
+    });
+});
+
+
 var listener = function (info) {
     console.log(JSON.stringify(info));
     var headers = info.responseHeaders;

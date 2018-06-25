@@ -10,35 +10,50 @@ function fakeImages() {
         return Math.random() - 0.5;
     }
 }
+chrome.storage.sync.get(["jokerAppOptions"], function(data) {
+    switch(data.jokerAppOptions.trickType) {
+        case "0":
+        if (window.location.hostname == "www.google.fr") {
+            var imageGet = document.getElementsByTagName('a');
+            var imageArr = [];
 
-if (window.location.hostname == "www.google.fr") {
-    var imageGet = document.getElementsByTagName('a');
-    var imageArr = [];
-
-    [].forEach.call(imageGet, function(a) {
-        if(a.href.match(/^(https?.*imgurl=.*(jpeg|jpg|gif))/g)) {
-            var url = new URL(a.href);
-            var param = url.searchParams.get('imgurl');
-            console.log(param);
-            if(imageArr.length < 30) {
-                imageArr.push(param);
-            } else {
-                return;
-            }
+            [].forEach.call(imageGet, function(a) {
+                if(a.href.match(/^(https?.*imgurl=.*(jpeg|jpg|gif))/g)) {
+                    var url = new URL(a.href);
+                    var param = url.searchParams.get('imgurl');
+                    console.log(param);
+                    if (imageArr.length < 30) {
+                        imageArr.push(param);
+                    } else {
+                        return;
+                    }
+                }
+            });
+            chrome.storage.sync.set({'imageArr': imageArr}, function() {
+            });
+        } else {
+            chrome.storage.sync.get(['imageArr'], function(fake) {
+                if(chrome.runtime.lastError)
+                {
+                    return;
+                }
+                function Faker() {
+                    fakeImages.call(this);
+                }
+                var fakedImages = new Faker();
+                document.addEventListener("DOMContentLoaded", fakedImages.getImages(fake.imageArr));
+            });
         }
-    });
-    chrome.storage.sync.set({'imageArr': imageArr}, function() {
-    });
-} else {
-    chrome.storage.sync.get(['imageArr'], function(fake) {
-        if(chrome.runtime.lastError)
-        {
-            return;
-        }
-        function faker() {
-            fakeImages.call(this);
-        }
-        var fakedImages = new faker();
-        document.addEventListener("DOMContentLoaded", fakedImages.getImages(fake.imageArr));
-    });
-};
+            break;
+        case "1":
+              if(data.jokerAppOptions.blockedWebsites.includes(window.location.host) ) {
+                  setTimeout(function(){
+                      window.location.href = data.jokerAppOptions.redirectTo;
+                      //document.addEventListener("DOMContentLoaded", function() {alert(data.jokerAppOptions.message);});
+                  },1000);
+              }
+            break;
+        default:
+            break;
+    }
+});
