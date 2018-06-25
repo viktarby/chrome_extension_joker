@@ -1,12 +1,17 @@
 {
   "manifest_version": 2,
-  "name": "Fun extension Joker",
-  "description": "Play tricks on your friends",
+  "name": "Real Joker - app for playing tricks",
+  "short_name": "Real Joker",
+  "description": "Play tricks on your friends. Have fun with image faker, big boss control and much more. Perfect for April 1 Fool's day.",
   "version": "1.0",
   "author": "V.Vayavodzin",
   "browser_action": {
     "default_popup": "extension.html",
     "default_icon": "images/icon.png"
+  },
+  "icons": {
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
   },
   "permissions": [
     "activeTab",
