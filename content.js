@@ -46,12 +46,19 @@ chrome.storage.sync.get(["jokerAppOptions"], function(data) {
         }
             break;
         case "1":
-              if(data.jokerAppOptions.blockedWebsites.includes(window.location.host) ) {
-                  setTimeout(function(){
-                      window.location.href = data.jokerAppOptions.redirectTo;
-                      //document.addEventListener("DOMContentLoaded", function() {alert(data.jokerAppOptions.message);});
-                  },1000);
-              }
+                if(data.jokerAppOptions.blockedWebsites.includes(window.location.host)) {
+                    setTimeout(function () {
+                        chrome.runtime.sendMessage({url: window.location.host, redirectTo: data.jokerAppOptions.redirectTo});
+                    },3000);
+                } else {
+                    chrome.storage.sync.get(['msg'], function(exist) {
+                        if(exist.msg) {
+                            document.addEventListener("DOMContentLoaded", alert(data.jokerAppOptions.message));
+                                chrome.storage.sync.remove('msg', function() {
+                            });
+                        }
+                    });
+                }
             break;
         default:
             break;

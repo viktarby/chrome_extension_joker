@@ -35,3 +35,19 @@ chrome.webRequest.onHeadersReceived.addListener(
 );
 
 chrome.webRequest.onErrorOccurred.removeListener(listener);
+
+chrome.runtime.onMessage.addListener(function(request, sender) {
+
+        chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, tabs => {
+            tabUtl = tabs[0].url;
+            var urlObj = new URL(tabUtl);
+            if(urlObj.hostname == request.url) {
+                chrome.tabs.update({url: 'http://' + request.redirectTo}, function(tabs){
+                    chrome.storage.sync.set({msg: 1}, function() {
+                    });
+
+                });
+            }
+        });
+
+});
