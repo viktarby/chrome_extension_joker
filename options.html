@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head><title>My Options</title></head>
+<body>
+<style>
+    div {
+        display: block;
+        padding-bottom: 10px;
+    }
+    input, select {
+        width: 65%;
+        float: right;
+    }
+</style>
+<div>Choose your trick:
+<select id="tricks">
+    <option value="0">Funny images</option>
+    <option value="1">Boss control</option>
+</select>
+</div>
+<div>Forbiden webpages: <input type="text" id="forbidenUrl"></div>
+<div>Redirect to: <input type="text" id="redirectTo" value=""></div>
+<div>Message: <input type="text" id="message" value=""></div>
+<button id="save">Save</button>
+<label id="msg"></label>
+<script src="options.js"></script>
+</body>
+</html>
