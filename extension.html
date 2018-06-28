@@ -2,26 +2,49 @@
 <html>
 <head><title>Choose your photo</title></head>
 <style>
-    .bg {
-        margin: 10px 10px 10px 10px;
+
+    body {
+        background-image: url(images/joker.jpg);
+        background-color: darkgreen;
+        background-position: center center;
+        background-attachment: fixed;
+        background-size: cover;
+        height: 140px;
+        width: 140px;
+    }
+    p{
+        color: white;
+    }
+    .ext {
+        padding: 5px 5px 5px 5px;
+
     }
     .searchField{
-        display: inline-block;
-        margin-bottom: 10px;
+        display: block;
+        padding-bottom: 5px;
+    }
+    .labelArea{
+        padding-top: 5px;
     }
     .btn{
-        display: inline-block;
         float: right;
+        background-color: darkred;
+        color: white;
+        position: absolute;
+        right:    10px;
+        bottom:   10px;
     }
+
     #msg{
-        display: inline-block;
-        text-align: center;
+        position: absolute;
+        left:    20px;
+        bottom:   5px;
     }
 </style>
 <body>
-<div class="bg">
+<div class="ext">
     <div class="searchField">
-        Choose your hero:
+        <p>Choose your hero:<p>
         <select id="creature">
             <option value="0">Stas Mihailov</option>
             <option value="1">Pamella Anderson</option>
@@ -29,12 +52,13 @@
             <option value="3">Custom value</option>
         </select>
     </div>
-    <label class="searchField">
+    <label class ="labelArea">
         <input type="text" id="hero" style="display:none">
     </label>
-    <div id = "msg" ></div>
+    <p id = "msg" >Saved</p>
     <button class="btn" id="save">Save</button>
-    <iframe id="iframe1" width="0 px" height="0 px"></iframe>
+    <iframe id="iframe1" width="0 px" height="0 px" style=" position: relative;
+ left: -400px;"></iframe>
 </div>
 <script src="popup.js"></script>
 </body>
