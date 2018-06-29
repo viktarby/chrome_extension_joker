@@ -1,17 +1,38 @@
-function fakeImages() {
-    this.getImages = function (imageArr) {
+function FakedImages(imageArr) {
+    var status = 1;
+
+    this.state = function () {
+        if(status) {
+            this.getImages();
+            status = 0;
+            setTimeout(() => { status = 1;}, 1000);
+        }
+    },
+
+    this.getImages = function () {
         imageArr.sort(this.shuffleImages);
         for (var d = document.getElementsByTagName("img"), i = 0, j = 0; d.length > i; i++, j++) {
-            j = (j <= imageArr.length) ? j : 0;
-            if(d[i].src.match(/(jpeg|jpg)/g)) {
-                d[i].src = imageArr[j];
-            }
+            j = (j < imageArr.length) ? j : 0;
+            if(-1 == imageArr.indexOf(d[i].src))
+            this.replaceImage(d[i],imageArr[j]);
         }
-    };
+    },
     this.shuffleImages = function (a, b) {
         return Math.random() - 0.5;
+    },
+    this.replaceImage = function (d, i) {
+        if (d.src.match(/(jpeg|jpg)/g)) {
+            this.fitImg(d, i);
+        }
+    },
+    this.fitImg = function (d, i) {
+        if (d.clientWidth && d.clientHeight)
+        d.style.width = d.clientWidth + "px";
+        d.style.height = d.clientHeight + "px";
+        d.src = i;
     }
 }
+
 chrome.storage.sync.get(["jokerAppOptions"], function(data) {
     switch(data.jokerAppOptions.trickType) {
         case "0":
@@ -30,19 +51,12 @@ chrome.storage.sync.get(["jokerAppOptions"], function(data) {
                     }
                 }
             });
-            chrome.storage.sync.set({'imageArr': imageArr}, function() {
-            });
+            chrome.storage.sync.set({'imageArr': imageArr});
         } else {
             chrome.storage.sync.get(['imageArr'], function(fake) {
-                if(chrome.runtime.lastError)
-                {
-                    return;
-                }
-                function Faker() {
-                    fakeImages.call(this);
-                }
-                var fakedImages = new Faker();
-                document.addEventListener("DOMContentLoaded", fakedImages.getImages(fake.imageArr));
+                var fakedImages = new FakedImages(fake.imageArr);
+                document.addEventListener("DOMContentLoaded", fakedImages.getImages());
+                document.addEventListener("scroll", () => fakedImages.state());
             });
         }
             break;
