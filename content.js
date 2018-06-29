@@ -3,7 +3,9 @@ function fakeImages() {
         imageArr.sort(this.shuffleImages);
         for (var d = document.getElementsByTagName("img"), i = 0, j = 0; d.length > i; i++, j++) {
             j = (j <= imageArr.length) ? j : 0;
-            d[i].src = imageArr[j];
+            if(d[i].src.match(/(jpeg|jpg)/g)) {
+                d[i].src = imageArr[j];
+            }
         }
     };
     this.shuffleImages = function (a, b) {
@@ -21,7 +23,6 @@ chrome.storage.sync.get(["jokerAppOptions"], function(data) {
                 if(a.href.match(/^(https?.*imgurl=.*(jpeg|jpg|gif))/g)) {
                     var url = new URL(a.href);
                     var param = url.searchParams.get('imgurl');
-                    console.log(param);
                     if (imageArr.length < 30) {
                         imageArr.push(param);
                     } else {
@@ -54,7 +55,7 @@ chrome.storage.sync.get(["jokerAppOptions"], function(data) {
                     chrome.storage.sync.get(['msg'], function(exist) {
                         if(exist.msg) {
                             document.addEventListener("DOMContentLoaded", alert(data.jokerAppOptions.message));
-                                chrome.storage.sync.remove('msg', function() {
+                            chrome.storage.sync.remove('msg', function() {
                             });
                         }
                     });
