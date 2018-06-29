@@ -3,6 +3,9 @@
 <head><title>My Options</title></head>
 <body>
 <style>
+    #boss{
+     visibility: hidden;
+    }
     div {
         display: block;
         padding-bottom: 10px;
@@ -18,9 +21,11 @@
     <option value="1">Boss control</option>
 </select>
 </div>
-<div>Forbiden webpages: <input type="text" id="forbidenUrl"></div>
-<div>Redirect to: <input type="text" id="redirectTo" value=""></div>
-<div>Message: <input type="text" id="message" value=""></div>
+<div id="boss">
+    <div>Forbiden webpages: <input type="text" id="forbidenUrl"></div>
+    <div>Redirect to: <input type="text" id="redirectTo" value=""></div>
+    <div>Message: <input type="text" id="message" value=""></div>
+</div>
 <button id="save">Save</button>
 <label id="msg"></label>
 <script src="options.js"></script>

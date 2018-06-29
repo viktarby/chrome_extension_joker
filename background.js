@@ -2,7 +2,7 @@ chrome.runtime.onInstalled.addListener(function() {
     var jokerAppOptions = {
         trickType: 0,
 
-        searchCreature: { val: 0, text: "Joker"},
+        searchCreature: { val: "0", text: "Joker"},
 
         blockedWebsites: ["www.youtube.com", "fb.com", "vk.com"],
         redirectTo: "http://google.com",
