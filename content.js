@@ -21,7 +21,7 @@ function FakedImages(imageArr) {
         return Math.random() - 0.5;
     },
     this.replaceImage = function (d, i) {
-        if (d.src.match(/(jpeg|jpg|png)/g) || 1) {
+        if (d.src.match(/(jpeg|jpg|png)/g)) {
             this.fitImg(d, i);
         }
     },
@@ -30,6 +30,10 @@ function FakedImages(imageArr) {
             d.width =  d.width ? d.width : d.clientWidth + "px";
             d.height =  d.height ? d.height : d.clientHeight + "px";
             d.src = i;
+
+            d.onerror = function () {
+                d.src = imageArr[10];
+            }
         }
     }
 }

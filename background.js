@@ -1,9 +1,7 @@
 chrome.runtime.onInstalled.addListener(function() {
     var jokerAppOptions = {
-        trickType: "0",
-
+        trickType: "1",
         searchCreature: { val: "0", text: "Joker"},
-
         blockedWebsites: ["www.youtube.com", "fb.com", "vk.com"],
         redirectTo: "http://google.com",
         message: "You\'ve visited infected resource, access denied"
@@ -42,7 +40,7 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
             tabUtl = tabs[0].url;
             var urlObj = new URL(tabUtl);
             if(urlObj.hostname == request.url) {
-                chrome.tabs.update({url: 'http://' + request.redirectTo}, function(tabs){
+                chrome.tabs.update({url: request.redirectTo}, function(tabs){
                     chrome.storage.sync.set({msg: 1}, function() {
                     });
 

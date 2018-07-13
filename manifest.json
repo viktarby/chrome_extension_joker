@@ -3,11 +3,11 @@
   "name": "Real Joker - app for playing tricks",
   "short_name": "Real Joker",
   "description": "Play tricks on your friends. Have fun with image faker, big boss control and much more. Perfect for April 1 Fool's day.",
-  "version": "1.0",
+  "version": "1.0.3",
   "author": "V.Vayavodzin",
   "browser_action": {
     "default_popup": "extension.html",
-    "default_icon": "images/icon.png"
+    "default_icon": "images/default_icon.png"
   },
   "options_page": "options.html",
   "options_ui": {
