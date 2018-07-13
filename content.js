@@ -17,19 +17,20 @@ function FakedImages(imageArr) {
             this.replaceImage(d[i],imageArr[j]);
         }
     },
-    this.shuffleImages = function (a, b) {
+    this.shuffleImages = function () {
         return Math.random() - 0.5;
     },
     this.replaceImage = function (d, i) {
-        if (d.src.match(/(jpeg|jpg)/g)) {
+        if (d.src.match(/(jpeg|jpg|png)/g) || 1) {
             this.fitImg(d, i);
         }
     },
     this.fitImg = function (d, i) {
-        if (d.clientWidth && d.clientHeight)
-        d.style.width = d.clientWidth + "px";
-        d.style.height = d.clientHeight + "px";
-        d.src = i;
+        if(d.clientWidth && d.clientHeight) {
+            d.width =  d.width ? d.width : d.clientWidth + "px";
+            d.height =  d.height ? d.height : d.clientHeight + "px";
+            d.src = i;
+        }
     }
 }
 

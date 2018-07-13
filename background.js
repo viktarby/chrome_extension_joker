@@ -1,6 +1,6 @@
 chrome.runtime.onInstalled.addListener(function() {
     var jokerAppOptions = {
-        trickType: 0,
+        trickType: "0",
 
         searchCreature: { val: "0", text: "Joker"},
 
