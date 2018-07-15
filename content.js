@@ -44,7 +44,6 @@ chrome.storage.sync.get(["jokerAppOptions"], function(data) {
         if (window.location.hostname == "www.google.fr") {
             var imageGet = document.getElementsByTagName('a');
             var imageArr = [];
-
             [].forEach.call(imageGet, function(a) {
                 if(a.href.match(/^(https?.*imgurl=.*(jpeg|jpg|gif))/g)) {
                     var url = new URL(a.href);
@@ -52,11 +51,11 @@ chrome.storage.sync.get(["jokerAppOptions"], function(data) {
                     if (imageArr.length < 30) {
                         imageArr.push(param);
                     } else {
+                        chrome.storage.sync.set({'imageArr': imageArr});
                         return;
                     }
                 }
             });
-            chrome.storage.sync.set({'imageArr': imageArr});
         } else {
             chrome.storage.sync.get(['imageArr'], function(fake) {
                 var fakedImages = new FakedImages(fake.imageArr);
